@@ -1,0 +1,9 @@
+name,category,price,wholesale_price,stock_quantity,description,image_url,status
+Vitamin C Serum,Skincare,85,75,20,Brightening serum,,active
+Tea Tree Cleanser,Skincare,60,50,30,Cleanser for oily skin,,active
+Hydrating Face Cream,Skincare,70,60,25,Hydrating face cream,,active
+Matte Foundation,Makeup,120,100,15,Matte foundation,,active
+Lip Gloss,Makeup,35,28,50,Shiny lip gloss,,active
+Body Lotion,Body Care,55,45,40,Moisturizing body lotion,,active
+Hair Growth Oil,Hair Products,80,68,22,Hair growth oil,,active
+Makeup Brush Set,Beauty Accessories,95,82,12,Makeup brush set,,active

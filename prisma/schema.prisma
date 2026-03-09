@@ -1,0 +1,147 @@
+// Prisma schema for Titi's Cosmetics
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  MOBILE_MONEY
+  CARD
+  PAY_ON_DELIVERY
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id             String      @id @default(cuid())
+  name           String
+  slug           String      @unique
+  description    String
+  categoryId     String
+  category       Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  price          Decimal     @db.Decimal(10, 2)
+  wholesalePrice Decimal?    @db.Decimal(10, 2)
+  stockQuantity  Int         @default(0)
+  imageUrl       String?
+  sku            String?     @unique
+  tags           String[]
+  status         String      @default("active")
+  featured       Boolean     @default(false)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  orderItems     OrderItem[]
+}
+
+model Customer {
+  id        String    @id @default(cuid())
+  fullName  String
+  phone     String   @unique
+  email     String?
+  region    String
+  city      String
+  address   String
+  orders    Order[]
+  createdAt DateTime  @default(now())
+}
+
+model Order {
+  id                String        @id @default(cuid())
+  orderCode         String        @unique
+  customerId        String
+  customer          Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  subtotal          Decimal       @db.Decimal(10, 2)
+  deliveryFee       Decimal       @db.Decimal(10, 2)
+  total             Decimal       @db.Decimal(10, 2)
+  paymentStatus     PaymentStatus @default(PENDING)
+  paymentMethod     PaymentMethod
+  orderStatus       OrderStatus   @default(PENDING)
+  paystackReference String?
+  allowPayOnDelivery Boolean      @default(false)
+  deliveryZoneId    String?
+  deliveryZone      DeliveryZone? @relation(fields: [deliveryZoneId], references: [id])
+  notes             String?
+  items             OrderItem[]
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+  unitPrice Decimal @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model DeliveryZone {
+  id        String   @id @default(cuid())
+  zone      String
+  slug      String   @unique
+  regions   String[]
+  fee       Decimal  @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+}
+
+model SiteSetting {
+  id                 Int      @id @default(1)
+  currency           String   @default("GHS")
+  allowPayOnDelivery Boolean  @default(true)
+  whatsappNumber     String   @default("233546817874")
+  supportEmail       String   @default("glowwithjuls@gmail.com")
+  supportPhone       String   @default("0546817874")
+  heroHeadline       String   @default("Beauty products you can trust")
+  heroSubheadline    String   @default("Nationwide delivery across Ghana")
+  updatedAt          DateTime @updatedAt
+}
+
+model ContactRequest {
+  id        String   @id @default(cuid())
+  fullName  String
+  phone     String   @unique
+  email     String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
