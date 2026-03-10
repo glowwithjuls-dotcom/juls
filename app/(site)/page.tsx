@@ -6,7 +6,7 @@ import { HighlightBanner } from '@/components/storefront/highlight-banner';
 import { CategoryPills } from '@/components/storefront/category-pills';
 import { getFeaturedProducts, getCategories } from '@/lib/data/products';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // 1 hour ISR
 export const metadata: Metadata = {
   title: 'Home',
   description: 'Wholesale and retail cosmetics delivered across Ghana with Mobile Money checkout.',

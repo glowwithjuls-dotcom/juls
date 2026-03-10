@@ -1,12 +1,13 @@
 ﻿'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { useCartTotals } from '@/stores/cart-store';
 
 const navItems = [
   { label: 'Shop', href: '/shop' },
@@ -16,7 +17,13 @@ const navItems = [
 
 export function SiteHeader({ className }: { className?: string }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+  const { totalItems } = useCartTotals();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Close menu when navigating
   const closeMenu = () => setIsMobileMenuOpen(false);
@@ -42,8 +49,16 @@ export function SiteHeader({ className }: { className?: string }) {
               Call us
             </Link>
           </Button>
-          <Button size="sm" asChild className="hidden md:inline-flex">
-            <Link href="/checkout">Checkout</Link>
+          <Button size="sm" asChild className="hidden md:inline-flex relative pr-8">
+            <Link href="/cart">
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Cart
+              {isMounted && totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
           </Button>
           <button
             className="md:hidden flex items-center justify-center p-2 text-charcoal"
@@ -81,8 +96,16 @@ export function SiteHeader({ className }: { className?: string }) {
                     Call 0546817874
                   </Link>
                 </Button>
-                <Button size="lg" asChild className="w-full">
-                  <Link href="/checkout" onClick={closeMenu}>Proceed to Checkout</Link>
+                <Button size="lg" asChild className="w-full relative">
+                  <Link href="/cart" onClick={closeMenu}>
+                    <ShoppingCart className="h-5 w-5 mr-2" />
+                    View Cart
+                    {isMounted && totalItems > 0 && (
+                      <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-brand-light text-brand-dark font-bold text-xs">
+                        {totalItems}
+                      </span>
+                    )}
+                  </Link>
                 </Button>
               </div>
             </div>

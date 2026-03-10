@@ -68,6 +68,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
           ))}
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: product.name,
+            description: product.description,
+            image: product.imageUrl ? [product.imageUrl] : [],
+            sku: product.sku || product.id,
+            offers: {
+              '@type': 'Offer',
+              price: product.price,
+              priceCurrency: 'GHS',
+              availability: product.stockQuantity > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            },
+          }),
+        }}
+      />
     </div>
   );
 }
