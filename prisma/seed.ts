@@ -50,6 +50,7 @@ async function seedProducts() {
         imageUrl: row.image_url || null,
         description: row.description || 'Cosmetics product',
         status: row.status || 'active',
+        featured: true,
       },
       create: {
         name,
@@ -61,6 +62,7 @@ async function seedProducts() {
         imageUrl: row.image_url || null,
         categoryId,
         status: row.status || 'active',
+        featured: true,
       },
     });
   }
