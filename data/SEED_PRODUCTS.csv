@@ -1,9 +1,9 @@
 name,category,price,wholesale_price,stock_quantity,description,image_url,status
-Vitamin C Serum,Skincare,85,75,20,Brightening serum,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300096/vitamin_c_serum_cchd0u.png,active
-Tea Tree Cleanser,Skincare,60,50,30,Cleanser for oily skin,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300096/tea_tree_cleanser_d3iht4.png,active
-Hydrating Face Cream,Skincare,70,60,25,Hydrating face cream,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300097/hydrating_face_cream_m23f4b.png,active
-Matte Foundation,Makeup,120,100,15,Matte foundation,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300098/matte_foundation_ofw3vj.png,active
-Lip Gloss,Makeup,35,28,50,Shiny lip gloss,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300100/lip_gloss_y3ovh1.png,active
-Body Lotion,Body Care,55,45,40,Moisturizing body lotion,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300101/body_lotion_xed0ly.png,active
-Hair Growth Oil,Hair Products,80,68,22,Hair growth oil,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300102/hair_growth_oil_hhyy4s.png,active
-Makeup Brush Set,Beauty Accessories,95,82,12,Makeup brush set,https://res.cloudinary.com/dp1bvwixy/image/upload/v1741300105/makeup_brush_set_z0rld1.png,active
+Vitamin C Serum,Skincare,85,75,20,Brightening serum,/images/products/vitamin_c_serum.png,active
+Tea Tree Cleanser,Skincare,60,50,30,Cleanser for oily skin,/images/products/tea_tree_cleanser.png,active
+Hydrating Face Cream,Skincare,70,60,25,Hydrating face cream,/images/products/hydrating_face_cream.png,active
+Matte Foundation,Makeup,120,100,15,Matte foundation,/images/products/matte_foundation.png,active
+Lip Gloss,Makeup,35,28,50,Shiny lip gloss,/images/products/lip_gloss.png,active
+Body Lotion,Body Care,55,45,40,Moisturizing body lotion,/images/products/body_lotion.png,active
+Hair Growth Oil,Hair Products,80,68,22,Hair growth oil,/images/products/hair_growth_oil.png,active
+Makeup Brush Set,Beauty Accessories,95,82,12,Makeup brush set,/images/products/makeup_brush_set.png,active

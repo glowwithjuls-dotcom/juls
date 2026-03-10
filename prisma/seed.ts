@@ -47,6 +47,9 @@ async function seedProducts() {
       update: {
         price: row.price ? Number(row.price) : 0,
         stockQuantity: Number(row.stock_quantity ?? 0),
+        imageUrl: row.image_url || null,
+        description: row.description || 'Cosmetics product',
+        status: row.status || 'active',
       },
       create: {
         name,
